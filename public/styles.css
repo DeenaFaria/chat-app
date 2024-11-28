@@ -1,0 +1,111 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  #chat-container {
+    width: 400px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+  }
+  #chat-box {
+    height: 400px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+  }
+  
+  .chat-bubble {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 15px;
+    max-width: 60%;
+    word-wrap: break-word;
+  }
+  
+  .chat-bubble.own {
+    align-self: flex-end;
+    background: #007bff;
+    color: white;
+  }
+  
+  .chat-bubble:not(.own) {
+    align-self: flex-start;
+    background: #f1f1f1;
+    color: black;
+  }
+  
+  #message-input {
+    width: 80%;
+    border: none;
+    padding: 10px;
+  }
+  #send-button {
+    width: 20%;
+    border: none;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+  }
+
+  .chat-bubble {
+    animation: slide-in 0.3s ease-out;
+  }
+  
+  @keyframes slide-in {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+/* Emoji button */
+#emoji-button {
+    background-color: transparent;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #emoji-picker {
+    position: absolute;
+    bottom: 70px; /* Adjust the position to make sure it's just above the input field */
+    left: 10px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none; /* Hidden by default */
+    z-index: 10;
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  .emoji {
+    font-size: 24px;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
+  .emoji:hover {
+    transform: scale(1.2);
+  }
+  
