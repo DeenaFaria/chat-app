@@ -16,6 +16,17 @@ body {
     overflow: hidden;
     position: relative;
   }
+  #room-selection-container {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  #room-dropdown, #new-room-input, #join-room-button {
+    margin: 10px;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
   #chat-box {
     height: 400px;
     overflow-y: auto;

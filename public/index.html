@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chat App</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="chat-container">
+  <div id="room-selection-container">
+    <h2>Select or Create a Room</h2>
+    <select id="room-dropdown">
+      <option value="">-- Select a Room --</option>
+    </select>
+    <input type="text" id="new-room-input" placeholder="Create a new room">
+    <button id="join-room-button">Join Room</button>
+  </div>
+
+  <div id="chat-container" style="display: none;">
     <div id="chat-box"></div>
+    <input type="text" id="message-input" placeholder="Type a message...">
+    <button id="emoji-button">😊</button>
+    <button id="send-button">Send</button>
     <div id="emoji-picker" style="display: none;">
       <span class="emoji">😊</span>
       <span class="emoji">😂</span>
@@ -16,11 +28,8 @@
       <span class="emoji">👍</span>
       <span class="emoji">😢</span>
     </div>
-    <input type="text" id="message-input" placeholder="Type a message..." />
-    <button id="emoji-button">😊</button>
-    <button id="send-button">Send</button>
   </div>
-  
+
   <script src="/socket.io/socket.io.js"></script>
   <script src="script.js"></script>
 </body>
