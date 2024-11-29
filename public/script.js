@@ -1,6 +1,6 @@
 const socket = io();
 const roomDropdown = document.getElementById("room-dropdown");
-const newRoomInput = document.getElementById("new-room-input");
+const newcurrentRoom = document.getElementById("new-room-input");
 const joinRoomButton = document.getElementById("join-room-button");
 const chatContainer = document.getElementById("chat-container");
 const chatBox = document.getElementById("chat-box");
@@ -26,7 +26,7 @@ socket.on("room-list", (rooms) => {
 // Handle room joining
 joinRoomButton.addEventListener("click", () => {
   const selectedRoom = roomDropdown.value;
-  const newRoom = newRoomInput.value.trim();
+  const newRoom = newcurrentRoom.value.trim();
 
   if (!selectedRoom && !newRoom) {
     alert("Please select or create a room!");
@@ -44,6 +44,38 @@ joinRoomButton.addEventListener("click", () => {
 
   console.log(`Joined room: ${currentRoom}`);
 });
+
+const typingTimeout = 3000; // Time to wait before considering the user has stopped typing
+let typingTimer;
+
+// Emit a "typing" event when the user types
+messageInput.addEventListener("input", () => {
+  socket.emit("typing", { nickname, room: currentRoom });
+
+  // Clear the existing timer
+  clearTimeout(typingTimer);
+
+  // Start a new timer to emit "stopped-typing" after inactivity
+  typingTimer = setTimeout(() => {
+    socket.emit("stopped-typing", { nickname, room: currentRoom });
+  }, typingTimeout);
+});
+
+const typingStatus = document.getElementById("typing-status");
+
+socket.on("typing", (data) => {
+  if (data.nickname !== nickname) { // Avoid showing "You are typing..."
+    typingStatus.textContent = `${data.nickname} is typing...`;
+  }
+});
+
+socket.on("stopped-typing", (data) => {
+  if (data.nickname !== nickname) {
+    typingStatus.textContent = "";
+  }
+});
+
+
 
 // Handle sending messages
 sendButton.addEventListener("click", () => {

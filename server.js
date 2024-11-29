@@ -25,6 +25,15 @@ io.on("connection", (socket) => {
     console.log(`${socket.id} joined room: ${room}`);
   });
 
+
+  socket.on("typing", (data) => {
+    socket.to(data.room).emit("typing", data); // Broadcast to others in the room
+  });
+
+  socket.on("stopped-typing", (data) => {
+    socket.to(data.room).emit("stopped-typing", data); // Broadcast to others in the room
+  });
+
   // Handle messages
   socket.on("message", (data) => {
     io.to(data.room).emit("message", { nickname: data.nickname, message: data.message });
